@@ -123,6 +123,15 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.get("/logout", authTokenHandler, async (req, res) => {
+  res.clearCookie("authToken");
+  res.clearCookie("refreshToken");
+  res.json({
+    ok: true,
+    message: "User logged out successfully",
+  });
+});
+
 router.use(errorHandler);
 
 router.get('/checklogin', authTokenHandler, async (req, res) => {
