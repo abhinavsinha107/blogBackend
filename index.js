@@ -15,27 +15,27 @@ const cookieParser = require("cookie-parser");
 const User = require("./Models/UserSchema");
 
 app.use(bodyParser.json());
-// const allowedOrigins = [
-//   "http://localhost:3000",
-//   "https://blog-frontend-7936fclkh-abhinav-sinhas-projects.vercel.app/",
-// ]; // Add more origins as needed
-
-// https://blog-frontend-nine-phi.vercel.app
-
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://blog-frontend-7936fclkh-abhinav-sinhas-projects.vercel.app/",
+  ]; // Add more origins as needed
+  
+  // https://blog-frontend-nine-phi.vercel.app
+  
+  // app.use(cors());
 // Configure CORS with credentials
-app.use(cors());
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true, // Allow credentials
-//   })
-// );
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow credentials
+  })
+);
 
 app.use(cookieParser());
 
