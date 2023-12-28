@@ -17,7 +17,7 @@ const User = require("./Models/UserSchema");
 app.use(bodyParser.json());
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://blog-frontend-qc5zdkb8r-abhinav-sinhas-projects.vercel.app",
+  "https://blog-frontend-nine-phi.vercel.app",
 ]; // Add more origins as needed
 
 // Configure CORS with credentials
