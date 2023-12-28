@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 function checkAuth(req, res, next) {
-
-  const authToken = req.cookies.authToken;
-  const refreshToken = req.cookies.refreshToken;
+  // console.log(req);
+  const authToken = req.cookie.authToken;
+  const refreshToken = req.cookie.refreshToken;
 
   console.log("Check Auth Token MIDDLEWARE CALLED", authToken);
 

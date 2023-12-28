@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
-
 // ugopdlzqmmvsebcg
 
 const transporter = nodemailer.createTransport({
@@ -101,7 +100,7 @@ router.post("/login", async (req, res, next) => {
     const authToken = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "10m" }
+      { expiresIn: "60m" }
     );
 
     // Generate a refresh token with a 10-day expiration
@@ -134,11 +133,11 @@ router.get("/logout", authTokenHandler, async (req, res) => {
 
 router.use(errorHandler);
 
-router.get('/checklogin', authTokenHandler, async (req, res) => {
+router.get("/checklogin", authTokenHandler, async (req, res) => {
   res.json({
     ok: true,
-    message: 'User authenticated succesfully'
-  })
-})
+    message: "User authenticated succesfully",
+  });
+});
 
 module.exports = router;
