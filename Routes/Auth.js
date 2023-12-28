@@ -109,8 +109,8 @@ router.post("/login", async (req, res, next) => {
       process.env.JWT_REFRESH_SECRET_KEY,
       { expiresIn: "1d" }
     );
-    res.cookie("authToken", authToken, { httpOnly: true }, (path = "/"));
-    res.cookie("refreshToken", refreshToken, { httpOnly: true }, (path = "/"));
+    res.cookie("authToken", authToken, { httpOnly: true, path: "/" });
+    res.cookie("refreshToken", refreshToken, { httpOnly: true, path: "/" });
     res.status(200).json(
       createResponse(true, "Login successful", {
         authToken,

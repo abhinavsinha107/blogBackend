@@ -48,8 +48,8 @@ function checkAuth(req, res, next) {
             );
 
             // Set the new tokens as cookies in the response
-            res.cookie("authToken", newAuthToken, { httpOnly: true });
-            res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
+            res.cookie("authToken", newAuthToken, { httpOnly: true, path: "/" });
+            res.cookie("refreshToken", newRefreshToken, { httpOnly: true, path: "/" });
 
             // Continue processing the request with the new auth token
             req.userId = refreshDecoded.userId;
