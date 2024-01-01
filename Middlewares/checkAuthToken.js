@@ -8,7 +8,7 @@ function checkAuth(req, res, next) {
   // const authToken = req.query.authToken;
   // const refreshToken = req.query.refreshToken;
 
-  console.log("Check Auth Token MIDDLEWARE CALLED", authToken);
+  // console.log("Check Auth Token MIDDLEWARE CALLED", authToken);
 
   if (!authToken || !refreshToken) {
     return res.status(401).json({
