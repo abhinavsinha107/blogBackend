@@ -1,15 +1,12 @@
 const jwt = require("jsonwebtoken");
 
 function checkAuth(req, res, next) {
-  // console.log(req.cookies);
-  // let cookieSet = JSON.parse(req.cookies)
-  // console.log(cookieSet);
+  // console.log(req.query);
 
-  // const authToken = cookieSet?.authToken;
-  // const refreshToken = cookieSet?.refreshToken;
-
-  const authToken = req.cookies.authToken;
-  const refreshToken = req.cookies.refreshToken;
+  const authToken = req.cookies.authToken || req.query.authToken;
+  const refreshToken = req.cookies.refreshToken || req.query.refreshToken;
+  // const authToken = req.query.authToken;
+  // const refreshToken = req.query.refreshToken;
 
   console.log("Check Auth Token MIDDLEWARE CALLED", authToken);
 
@@ -39,7 +36,7 @@ function checkAuth(req, res, next) {
             const newAuthToken = jwt.sign(
               { userId: refreshDecoded.userId },
               process.env.JWT_SECRET_KEY,
-              { expiresIn: "10m" }
+              { expiresIn: "40m" }
             );
             const newRefreshToken = jwt.sign(
               { userId: refreshDecoded.userId },
@@ -48,8 +45,8 @@ function checkAuth(req, res, next) {
             );
 
             // Set the new tokens as cookies in the response
-            res.cookie("authToken", newAuthToken, { httpOnly: true, path: "/" });
-            res.cookie("refreshToken", newRefreshToken, { httpOnly: true, path: "/" });
+            res.cookie("authToken", newAuthToken, { httpOnly: true });
+            res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
 
             // Continue processing the request with the new auth token
             req.userId = refreshDecoded.userId;
